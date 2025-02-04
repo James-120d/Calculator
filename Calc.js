@@ -1,11 +1,13 @@
-let currentInput = 0;
-let previousInput = 0;
-let operator = 0;
+let currentInput = ""
+let previousInput = null
+let operator = null
+
 
 const buttons = document.getElementById("grid")
+const display = document.getElementById("screen")
 
-//Button creation + identifiers
 
+//Loop to create the buttons and their identifiers 
 for (let i = 0; i < 15; i++) {
     const newDiv = document.createElement("div")
     newDiv.className = "button";
@@ -20,49 +22,38 @@ for (let i = 0; i < 15; i++) {
     } else if (i === 14) {
         newDiv.textContent = "C";
     } else if (i === 13) {
-        newDiv.textContent = ".";
+        newDiv.textContent = "CE";
     } else {
         newDiv.textContent = (i + 1).toString();
     }
-    newDiv.addEventListener("click", () => {
-        currentInput = (i + 1)
-    })
+    newDiv.addEventListener("click", () => handleButtonClick(newDiv.textContent));
     buttons.appendChild(newDiv);
-    console.log(newDiv)
-}
-
-// Operator Functions
-function add() {
-    let sum = previousInput += currentInput
-
-}
-function subtract() {
-    let sum = previousInput -= currentInput
-}
-function multiply() {
-    let sum = previousInput *= currentInput
-}
-function divide() {
-    let sum = previousInput /= currentInput
 }
 
 
-
-
-
-/*
-function operator(oper) {
-    if oper == ("+"){
-
+// This function is to handle the input from the user and send it to the display function (updateDisplay)
+function handleButtonClick(value){
+    if (!isNaN(value)){
+        currentInput += value
+        updateDisplay(currentInput)
     }
-    else if oper == ("-"){
-
+    else if (value == "+","-","/"){
+        currentInput = previousInput
+        
     }
-    else if oper == ("*"){
-
+    else if (value === "CE"){
+        updateDisplay("")
     }
-    else if oper == ("/"){
-
+    else if (value === "C") {
+        updateDisplay("")
+        previousInput = null
+        operator = null
     }
 }
-*/
+
+
+
+// Function used to Display something within the Screen Div
+function updateDisplay(value){
+    display.textContent = value;
+}
