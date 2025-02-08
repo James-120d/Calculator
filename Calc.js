@@ -33,13 +33,18 @@ for (let i = 0; i < 15; i++) {
 
 // This function is to handle the input from the user and send it to the display function (updateDisplay)
 function handleButtonClick(value){
-    if (!isNaN(value)){
-        currentInput += value
-        updateDisplay(currentInput)
+    if (!isNaN(value)){ //isNaN = "is not a number" so this makes sure it is a number with not not a number
+        currentInput += value;
+        updateDisplay(currentInput);
     }
-    else if (value == "+","-","/"){
-        currentInput = previousInput
-        
+    else if (value === "+" || value === "-" || value ==="/"){
+        if(currentInput !== ""){
+            previousInput = currentInput;
+            operator = value;
+            currentInput = "";
+            updateDisplay(previousInput + "" + operator);
+            console.log(operator); //Test operator works 
+        }
     }
     else if (value === "CE"){
         updateDisplay("")
